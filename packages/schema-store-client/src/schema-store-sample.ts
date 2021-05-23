@@ -28,7 +28,7 @@ export class SchemaStoreSample extends SchemaStore {
             },
             "impression": {"type": "string", "title": "このウェブサイトに関するご意見を入力してください"}
           },
-          "meyasubakoOptions": {
+          "reportBoxOptions": {
             "signedParameters": {
               "type": "object",
               "required": ["userId"],

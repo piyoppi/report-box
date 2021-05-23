@@ -11,7 +11,7 @@ const baseJson = {
     "q1": {"type": "string", "title": "Question1"},
     "q2": {"type": "string", "title": "Question2"}
   },
-  "meyasubakoOptions": {
+  "reportBoxOptions": {
     "signedParameters": {
       "type": "object",
       "required": ["userId"],

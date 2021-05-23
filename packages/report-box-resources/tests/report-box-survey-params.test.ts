@@ -13,7 +13,7 @@ const itemSchema = {
 } as JSONSchema7
 
 const optionalSchema = {
-  "meyasubakoOptions": {
+  "reportBoxOptions": {
     "signedParameters": {
       "type": "object",
       "required": ["userId"],
@@ -35,14 +35,14 @@ const baseJson = {
 const schema = new ReportBoxSchema(baseJson)
 
 describe('itemSchema', () => {
-  test('Should return JSON Schema except for meyasubakoOptions', () => {
+  test('Should return JSON Schema except for reportBoxOptions', () => {
     expect(schema.itemSchema).toEqual(itemSchema)
   })
 })
 
 describe('optionalSettings', () => {
   test('Should return optionalSettings', () => {
-    const expectedOptional = new ReportBoxOptionSettings(optionalSchema.meyasubakoOptions)
+    const expectedOptional = new ReportBoxOptionSettings(optionalSchema.reportBoxOptions)
     expect(schema.optionalSettings).toEqual(expectedOptional)
   })
 })
