@@ -1,0 +1,21 @@
+{
+  "name": "report-box",
+  "version": "0.0.1",
+  "description": "",
+  "workspaces": [
+    "packages/form-helpers",
+    "packages/forms",
+    "packages/report-client",
+    "packages/request-validator",
+    "packages/schema-store-client",
+    "packages/signed-parameters-sample",
+    "packages/report-box-resources"
+  ],
+  "scripts": {
+    "test": "npm test --ws",
+    "build": "npm run build --ws"
+  },
+  "author": "piyoppi",
+  "license": "ISC",
+  "devDependencies": {}
+}

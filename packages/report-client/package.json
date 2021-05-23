@@ -1,0 +1,30 @@
+{
+  "name": "@piyoppi/report-box-report-client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/main.js",
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/piyoppi/report-box"
+  },
+  "dependencies": {
+    "@piyoppi/report-box-resources": "0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3",
+    "@types/jest": "^26.0.20",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "author": "piyoppi",
+  "license": "ISC"
+}

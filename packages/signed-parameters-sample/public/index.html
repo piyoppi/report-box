@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Signed Parameters Sample</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="index.css">
+  </head>
+
+  <body>
+    <article>
+      <iframe id="survey-form" class="survey-form" src="http://localhost:3000/surveys/with-signed-params"></iframe>
+    </article>
+
+    <script type="text/javascript">
+      const iframe = document.getElementById('survey-form')
+      const formOrigin = 'http://localhost:3000'
+
+      window.addEventListener('message', e => {
+        if (e.origin !== formOrigin) return
+
+        if (e.data.event === 'readyToReceiveSignedParameters') {
+          fetch('/token')
+            .then(response => response.text())
+            .then(text => {
+              iframe.contentWindow.postMessage(text, formOrigin)
+              console.log(`Posted token : ${text}`)
+            })
+        }
+      })
+    </script>
+
+    <footer>
+      <p>garakuta-toolbox</p>
+      <p>Author: piyoppi</p>
+      <a href="https://garakuta-toolbox.com">HP</a>
+      <a href="https://github.com/piyoppi">GitHub(@piyoppi)</a>
+      <a href="https://twitter.com/piyorinpa">Twitter(@piyorinpa)</a>
+    </footer>
+  </body>
+</html>

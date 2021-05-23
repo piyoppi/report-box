@@ -1,0 +1,87 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  piyopiyo-report-aws-sam
+
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  PostReportApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors:
+         AllowMethods: "'OPTIONS,POST'"
+         AllowHeaders: "'Content-Type'"
+         AllowOrigin: !Sub ["'${Origin}'", {Origin: !Ref FrontendOrigin}]
+      DefinitionBody:
+        openapi: 3.0.0
+        info:
+          description: ""
+          version: "1.0.0"
+          title: "piyopiyo-reoprt-api"
+        servers:
+          - url: /Prod
+        x-amazon-apigateway-request-validators:
+          basic:
+            validateRequestBody : false
+            validateRequestParameters : true
+        x-amazon-apigateway-request-validator: basic
+        paths:
+          /surveys/{schemaId}/report:
+            post:
+              parameters:
+                - name: "schemaId"
+                  in: "path"
+                  description: "schema id"
+                  required: true
+                  type: "string"
+              operationId: PostReport
+              security: []
+              responses:
+                '201':
+                  description: 201 response
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PostReportFunction.Arn}/invocations
+                passthroughBehavior: when_no_templates
+                httpMethod: POST
+                type: aws_proxy
+
+  PostReportFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/
+      Handler: report.postReportLambdaHandler
+      Runtime: nodejs14.x
+      Policies: 
+       - AmazonS3FullAccess
+      Events:
+        PostReport:
+          Type: Api
+          Properties:
+            Path: /surveys/{schemaId}/report
+            Method: POST
+            RestApiId: !Ref PostReportApi
+      Environment:
+        Variables:
+          FRONTEND_ORIGIN: !Ref FrontendOrigin
+          REPORT_BUCKET: !Ref ReportBucket
+          SCHEMA_STORE_BASE_URL: !Ref SchemaStoreBaseUrl
+          SIGNED_PARAMS_SECRET: !Ref SignedParamsSecret
+          DEVELOPMENT: false
+
+Parameters:
+  FrontendOrigin:
+    Type: String
+    Default: http://localhost:3000
+  ReportBucket:
+    Type: String
+  SchemaStoreBaseUrl:
+    Type: String
+  SignedParamsSecret:
+    Type: String
