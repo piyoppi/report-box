@@ -1,5 +1,7 @@
 # ReportBox
 
+[![tests](https://github.com/piyoppi/report-box/actions/workflows/tests.yml/badge.svg)](https://github.com/piyoppi/report-box/actions/workflows/tests.yml)
+
 ReportBox is a simple library for creating surveys.
 
 This library is under development.
