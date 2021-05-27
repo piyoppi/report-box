@@ -13,6 +13,7 @@ import { Button, CircularProgress } from '@material-ui/core'
 import { blue } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
+import { UISchemaGenerator } from '../lib/uiSchemaGenerator'
 
 const useStyles = makeStyles((theme) => ({
   buttonProgress: {
@@ -33,6 +34,7 @@ export default function FormPage() {
   const { id }: { id: string } = useParams()
   const history = useHistory()
   const [schema, setSchema] = useState({})
+  const [uiSchema, setUiSchema] = useState({})
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [succeeded, setSucceeded] = useState(false)
@@ -40,6 +42,9 @@ export default function FormPage() {
   useEffect(() => {
     store.fetchSchema(id).then((schema: ReportBoxSchema) => {
       setSchema(schema.itemSchema)
+
+      const uiSchemaGenerator = new UISchemaGenerator(schema.itemSchema)
+      setUiSchema(uiSchemaGenerator.generate())
 
       if (schema.optionalSettings.canConnectEmbeddingParent) {
         registerGetMessageHandler(schema.optionalSettings.embeddedOptions.parentOrigin, client)
@@ -69,6 +74,7 @@ export default function FormPage() {
         <Form
           onSubmit={submit}
           schema={schema}
+          uiSchema={uiSchema}
           showErrorList={false}
           transformErrors={config.errorTransformer}
           onError={onError}
