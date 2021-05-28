@@ -27,15 +27,16 @@ export class UISchemaGenerator {
     return generated
   }
 
-  getComponentType(property: JSONSchema7Definition) {
+  private getComponentType(property: JSONSchema7Definition) {
+    if (typeof property === 'boolean') return ''
+
     return (this.testCheckBox(property) && 'checkboxes') ||
            (this.testTextArea(property) && 'textarea') ||
             ''
   }
 
-  private testCheckBox(property: JSONSchema7Definition): boolean {
+  private testCheckBox(property: JSONSchema7): boolean {
     if (
-      typeof property === 'boolean' ||
       !property.items ||
       typeof property.items === 'boolean' ||
       Array.isArray(property.items)
@@ -44,9 +45,7 @@ export class UISchemaGenerator {
     return property.type === 'array' && property.items.enum?.length !== 0
   }
 
-  private testTextArea(property: JSONSchema7Definition): boolean {
-    if (typeof property === 'boolean') return false
-
+  private testTextArea(property: JSONSchema7): boolean {
     return property.type === 'string' && !!property.maxLength && property.maxLength >= 20
   }
 }
