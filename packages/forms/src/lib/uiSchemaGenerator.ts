@@ -1,7 +1,8 @@
 import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
 
 const uiSchemaMap = {
-  'checkboxes': {'ui:widget': 'checkboxes'}
+  'checkboxes': {'ui:widget': 'checkboxes'},
+  'textarea': {'ui:widget': 'textarea'}
 }
 
 export class UISchemaGenerator {
@@ -27,7 +28,9 @@ export class UISchemaGenerator {
   }
 
   getComponentType(property: JSONSchema7Definition) {
-    return (this.testCheckBox(property) && 'checkboxes') || ''
+    return (this.testCheckBox(property) && 'checkboxes') ||
+           (this.testTextArea(property) && 'textarea') ||
+            ''
   }
 
   private testCheckBox(property: JSONSchema7Definition): boolean {
@@ -39,5 +42,11 @@ export class UISchemaGenerator {
     ) return false
 
     return property.type === 'array' && property.items.enum?.length !== 0
+  }
+
+  private testTextArea(property: JSONSchema7Definition): boolean {
+    if (typeof property === 'boolean') return false
+
+    return property.type === 'string' && !!property.maxLength && property.maxLength >= 20
   }
 }
