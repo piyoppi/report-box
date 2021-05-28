@@ -26,6 +26,27 @@ export class SchemaStoreSample extends SchemaStore {
               },
               "uniqueItems": true
             },
+            "good": {
+              "title": "良い点を教えてください",
+              "type": "string",
+              "maxLength": 30
+            },
+            "bad": {
+              "title": "悪い点を教えてください",
+              "type": "string",
+              "maxLength": 30
+            },
+            "useful": {
+              "type": "number",
+              "title": "このコンテンツのお役立ち度を教えてください",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
             "impression": {"type": "string", "title": "このウェブサイトに関するご意見を入力してください"}
           },
           "reportBoxOptions": {
