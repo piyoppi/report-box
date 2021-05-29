@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import Form from '@rjsf/material-ui'
 import './Form.css';
 import { config } from './../config'
 import { createStore } from './../lib/storeGenerator'
@@ -9,32 +8,16 @@ import {
   useParams,
   useHistory
 } from 'react-router-dom'
-import { Button, CircularProgress } from '@material-ui/core'
-import { blue } from '@material-ui/core/colors'
-import { makeStyles } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
-import { UISchemaGenerator } from '../lib/uiSchemaGenerator'
-
-const useStyles = makeStyles((theme) => ({
-  buttonProgress: {
-    color: blue[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -12,
-    marginLeft: -12,
-  },
-}));
+import { SurveyForm } from '../components/SurveyForm'
 
 const client = new ReportClient(config.baseUrl)
 
 export default function FormPage() {
-  const classes = useStyles()
   const store = createStore()
   const { id }: { id: string } = useParams()
   const history = useHistory()
   const [schema, setSchema] = useState({})
-  const [uiSchema, setUiSchema] = useState({})
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [succeeded, setSucceeded] = useState(false)
@@ -42,9 +25,6 @@ export default function FormPage() {
   useEffect(() => {
     store.fetchSchema(id).then((schema: ReportBoxSchema) => {
       setSchema(schema.itemSchema)
-
-      const uiSchemaGenerator = new UISchemaGenerator(schema.itemSchema)
-      setUiSchema(uiSchemaGenerator.generate())
 
       if (schema.optionalSettings.canConnectEmbeddingParent) {
         registerGetMessageHandler(schema.optionalSettings.embeddedOptions.parentOrigin, client)
@@ -66,25 +46,19 @@ export default function FormPage() {
     }
   }
 
-  const onError = () => setHasError(true)
+  const onError = () => {
+    setHasError(true)
+  }
 
   return (
     <article>
       { !succeeded &&
-        <Form
+        <SurveyForm
           onSubmit={submit}
           schema={schema}
-          uiSchema={uiSchema}
-          showErrorList={false}
-          transformErrors={config.errorTransformer}
           onError={onError}
-        >
-          <div className="submit-container">
-            <Button size="large" disabled={loading} type="submit" variant="contained" color="primary">
-              { loading && <CircularProgress size={24} className={classes.buttonProgress} /> } 送信
-            </Button>
-          </div>
-        </Form>
+          loading={loading}
+        />
       }
       { hasError && <Alert severity="error">入力内容に不備があります</Alert>}
       { succeeded && <Alert severity="success">投稿が完了しました</Alert>}
