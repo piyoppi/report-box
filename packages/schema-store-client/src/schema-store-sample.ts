@@ -7,38 +7,70 @@ export class SchemaStoreSample extends SchemaStore {
 
     switch(id) {
       default:
-        json = {
-          "title": "ウェブサイト訪問者アンケート",
+        return new ReportBoxSchema({
+          "title": "テストフォーム",
           "type": "object",
-          "required": ["known", "impression"],
+          "required": ["requiredText"],
           "properties": {
-            "known": {
+            "multipleWithlimit": {
               "type": "array",
-              "title": "このウェブサイトについてどこで知りましたか？",
+              "title": "2つまで選択できるフォーム",
               "items": {
                 "type": "string",
                 "enum": [
-                  "インターネット",
-                  "知人からの口コミ",
-                  "記事",
-                  "広告"
-                ]
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
               },
+              "maxItems": 2,
               "uniqueItems": true
             },
-            "good": {
-              "title": "良い点を教えてください",
+            "multipleWithUnderLimit": {
+              "type": "array",
+              "title": "3つ以上選択が必須なフォーム",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+              },
+              "minItems": 3,
+              "uniqueItems": true
+            },
+            "longtext": {
+              "title": "30文字まで入力できるフォーム",
               "type": "string",
               "maxLength": 30
             },
-            "bad": {
-              "title": "悪い点を教えてください",
+            "shorttext": {
               "type": "string",
-              "maxLength": 30
+              "title": "5文字以上入力する必要があるフォーム",
+              "minLength": 5
+            },
+            "requiredText": {
+              "type": "string",
+              "title": "入力必須テキスト"
+            },
+            "specifiedPattern": {
+              "type": "string",
+              "title": "メールアドレス",
+              /*ref: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address*/
+              "pattern": "^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            },
+            "numberWithUnderLimit": {
+              "type": "number",
+              "title": "1以上5以下の数値",
+              "minimum": 1,
+              "maximum": 5
             },
             "useful": {
               "type": "number",
-              "title": "このコンテンツのお役立ち度を教えてください",
+              "title": "選択フォーム",
               "enum": [
                 1,
                 2,
@@ -47,7 +79,6 @@ export class SchemaStoreSample extends SchemaStore {
                 5
               ]
             },
-            "impression": {"type": "string", "title": "このウェブサイトに関するご意見を入力してください"}
           },
           "reportBoxOptions": {
             "signedParameters": {
@@ -63,9 +94,7 @@ export class SchemaStoreSample extends SchemaStore {
               "parentOrigin": "http://localhost:3001"
             }
           }
-        }
+        })
     }
-
-    return new ReportBoxSchema(json)
   }
 }

@@ -6,6 +6,7 @@ import { blue } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
 import { UISchemaGenerator } from '../lib/uiSchemaGenerator'
 import { JSONSchema7 } from 'json-schema'
+import { transformErrors } from '../lib/errorTransformer'
 
 const useStyles = makeStyles(() => ({
   buttonProgress: {
@@ -55,7 +56,8 @@ export const SurveyForm: React.FunctionComponent<SurveyFormPropTypes> = (props) 
       uiSchema={uiSchema}
       formData={formData}
       showErrorList={false}
-      transformErrors={config.errorTransformer}
+      transformErrors={(e) => transformErrors(e, config.errorMessageTemplates)}
+      noHtml5Validate={true}
       onError={onError}
     >
       <div className="submit-container">
