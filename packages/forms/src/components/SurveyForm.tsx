@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { UISchemaGenerator } from '../lib/uiSchemaGenerator'
 import { JSONSchema7 } from 'json-schema'
 import { transformErrors } from '../lib/errorTransformer'
+import { withTheme } from '@rjsf/core'
+
+const ThemedForm = config.formTheme ? withTheme(config.formTheme) : Form
 
 const useStyles = makeStyles(() => ({
   buttonProgress: {
@@ -49,7 +52,7 @@ export const SurveyForm: React.FunctionComponent<SurveyFormPropTypes> = (props) 
   }, [props.schema])
 
   return (
-    <Form
+    <ThemedForm
       onSubmit={submit}
       onChange={changed}
       schema={props.schema}
@@ -65,6 +68,6 @@ export const SurveyForm: React.FunctionComponent<SurveyFormPropTypes> = (props) 
           { props.loading && <CircularProgress size={24} className={classes.buttonProgress} /> } 送信
         </Button>
       </div>
-    </Form>
+    </ThemedForm>
   )
 }

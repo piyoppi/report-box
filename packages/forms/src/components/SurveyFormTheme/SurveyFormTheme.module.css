@@ -1,0 +1,16 @@
+.Description {
+  margin-bottom: 15px;
+}
+
+form > div > .WidgetContainer {
+  border: none;
+  padding: 0;
+}
+
+.WidgetContainer {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
