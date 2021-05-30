@@ -4,7 +4,9 @@ import * as styles from './SurveyFormTheme.module.css'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import List from '@material-ui/core/List'
+import Chip from '@material-ui/core/Chip'
 import ListItem from '@material-ui/core/ListItem'
+import { config } from '../../config'
 
 const FieldTemplate = ({
   id,
@@ -23,9 +25,14 @@ const FieldTemplate = ({
       <div className={styles.WidgetContainer}>
         {displayLabel && rawDescription ? (
           <div className={styles.Description}>
+            {required ? <Chip className={styles.Required} size="small" label={config.parameterNames.required} /> : null}
             {rawDescription}
           </div>
-        ) : null}
+        ) : (
+          <div>
+            {required ? <Chip className={styles.Required} size="small" label={config.parameterNames.required} /> : null}
+          </div>
+        )}
         {children}
         {rawErrors.length > 0 && (
           <List dense={true} disablePadding={true}>

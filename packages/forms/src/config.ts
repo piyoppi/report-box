@@ -1,4 +1,5 @@
 import { jaErrorMessageTemplates } from './errorMessageTemplates/ja'
+import { jaParameterNames } from './parameterNames/ja'
 import { SurveyFormTheme } from './components/SurveyFormTheme/SurveyFormTheme'
 
 export const config = {
@@ -6,5 +7,6 @@ export const config = {
   schemaBaseUrl: process.env.REACT_APP_SCHEMA_BASE_URL || 'http://localhost',
   developmentMode: process.env.REACT_APP_DEVELOPMENT_MODE === 'true' ?  true : false,
   errorMessageTemplates: jaErrorMessageTemplates,
-  formTheme: SurveyFormTheme
+  formTheme: SurveyFormTheme,
+  parameterNames: jaParameterNames
 }
