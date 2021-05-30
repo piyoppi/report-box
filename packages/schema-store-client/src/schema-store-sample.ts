@@ -15,6 +15,7 @@ export class SchemaStoreSample extends SchemaStore {
             "multipleWithlimit": {
               "type": "array",
               "title": "2つまで選択できるフォーム",
+              "description": "2つまで選択してください",
               "items": {
                 "type": "string",
                 "enum": [
@@ -44,21 +45,25 @@ export class SchemaStoreSample extends SchemaStore {
             },
             "longtext": {
               "title": "30文字まで入力できるフォーム",
+              "description": "30文字までの文字列を入力してください",
               "type": "string",
               "maxLength": 30
             },
             "shorttext": {
               "type": "string",
+              "description": "5文字以上入力してください",
               "title": "5文字以上入力する必要があるフォーム",
               "minLength": 5
             },
             "requiredText": {
               "type": "string",
+              "description": "テキストを入力してください",
               "title": "入力必須テキスト"
             },
             "specifiedPattern": {
               "type": "string",
               "title": "メールアドレス",
+              "description": "普段お使いのメールアドレスを入力してください",
               /*ref: https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address*/
               "pattern": "^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
             },
@@ -71,6 +76,7 @@ export class SchemaStoreSample extends SchemaStore {
             "useful": {
               "type": "number",
               "title": "選択フォーム",
+              "description": "数値を選択してください",
               "enum": [
                 1,
                 2,
