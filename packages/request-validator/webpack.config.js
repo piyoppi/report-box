@@ -11,7 +11,12 @@ module.exports = {
     libraryTarget: 'commonjs'
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
+    /* For jsonwebtoken(jws, jwa)*/
+    fallback: {
+      "crypto": false,
+      "stream": false
+    }
   },
   module: {
     rules: [
