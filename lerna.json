@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "npmClient": "npm",
+  "packages": [
+    "packages/forms",
+    "packages/report-client",
+    "packages/request-validator",
+    "packages/schema-store-client",
+    "packages/signed-parameters-sample",
+    "packages/report-box-resources"
+  ]
+}
