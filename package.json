@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "npm test --ws",
+    "test": "lerna run test",
+    "bootstrap": "lerna bootstrap",
     "build": "(cd packages/report-box-resources && npm run build) && (cd packages/report-client && npm run build) && (cd packages/request-validator && npm run build) && (cd packages/schema-store-client && npm run build)"
   },
   "author": "piyoppi",
