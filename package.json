@@ -2,20 +2,13 @@
   "name": "report-box",
   "version": "0.0.1",
   "description": "",
-  "workspaces": [
-    "packages/form-helpers",
-    "packages/forms",
-    "packages/report-client",
-    "packages/request-validator",
-    "packages/schema-store-client",
-    "packages/signed-parameters-sample",
-    "packages/report-box-resources"
-  ],
   "scripts": {
     "test": "npm test --ws",
     "build": "(cd packages/report-box-resources && npm run build) && (cd packages/report-client && npm run build) && (cd packages/request-validator && npm run build) && (cd packages/schema-store-client && npm run build)"
   },
   "author": "piyoppi",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
