@@ -3,7 +3,8 @@ import { ReportBoxOptionsEmbed, ReportBoxOptionSettingsEmbed } from './embedded-
 
 export type ReportBoxOptions = {
   signedParameters?: JSONSchema7,
-  embedded?: ReportBoxOptionsEmbed
+  embedded?: ReportBoxOptionsEmbed,
+  callbackUrl?: string
 }
 
 export class ReportBoxOptionSettings {
@@ -36,6 +37,10 @@ export class ReportBoxOptionSettings {
     if (!this._embeddedOptions) throw new Error('Embedded option is not given')
 
     return this._embeddedOptions
+  }
+
+  get callbackUrl() {
+    return this._params.callbackUrl || ''
   }
 
   private _setEmbeddedOptionsIfNeeded() {

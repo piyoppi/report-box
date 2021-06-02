@@ -79,3 +79,18 @@ describe('setParameters', () => {
     expect(option.embeddedOptions.parentOrigin).toEqual(parentOrigin)
   })
 })
+
+describe('callbackUrl', () => {
+  test('Should return callbackUrl when the option has a callbackUrl', () => {
+    const callbackUrl = 'https://example.com'
+    const option = new ReportBoxOptionSettings({callbackUrl})
+
+    expect(option.callbackUrl).toEqual(callbackUrl)
+  })
+
+  test('Should return an empty string when the callbackUrl is not given', () => {
+    const option = new ReportBoxOptionSettings({})
+
+    expect(option.callbackUrl).toEqual('')
+  })
+})
