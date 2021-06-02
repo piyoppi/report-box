@@ -6,6 +6,22 @@ export class SchemaStoreSample extends SchemaStore {
     let json = {}
 
     switch(id) {
+      case 'with-callback':
+        return new ReportBoxSchema({
+          "title": "テストフォーム",
+          "type": "object",
+          "required": ["requiredText"],
+          "properties": {
+            "requiredText": {
+              "type": "string",
+              "description": "テキストを入力してください",
+              "title": "入力必須テキスト"
+            }
+          },
+          "reportBoxOptions": {
+            "callbackUrl": "https://example.com/callback"
+          }
+        })
       default:
         return new ReportBoxSchema({
           "title": "テストフォーム",
