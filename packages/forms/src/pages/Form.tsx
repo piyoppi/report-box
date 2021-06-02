@@ -12,6 +12,7 @@ import Alert from '@material-ui/lab/Alert'
 import { SurveyForm } from '../components/SurveyForm'
 
 const client = new ReportClient(config.baseUrl)
+let reportBoxSchema: ReportBoxSchema | null = null
 
 export default function FormPage() {
   const store = createStore()
@@ -24,6 +25,7 @@ export default function FormPage() {
 
   useEffect(() => {
     store.fetchSchema(id).then((schema: ReportBoxSchema) => {
+      reportBoxSchema = schema
       setSchema(schema.itemSchema)
 
       if (schema.optionalSettings.canConnectEmbeddingParent) {
@@ -38,7 +40,13 @@ export default function FormPage() {
     setLoading(true)
     try {
       await client.submit(id, e.formData)
-      setSucceeded(true)
+
+      const callbackUrl = reportBoxSchema?.optionalSettings.callbackUrl
+      if (callbackUrl) {
+        window.location.href = callbackUrl
+      } else {
+        setSucceeded(true)
+      }
     } catch(_) {
       setHasError(true)
     } finally {
