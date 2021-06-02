@@ -74,6 +74,7 @@ Resources:
           SCHEMA_STORE_BASE_URL: !Ref SchemaStoreBaseUrl
           SIGNED_PARAMS_SECRET: !Ref SignedParamsSecret
           DEVELOPMENT: false
+          SCHEMA_STORE_SAMPLE: false
 
 Parameters:
   FrontendOrigin:
