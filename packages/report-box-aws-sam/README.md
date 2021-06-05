@@ -1,10 +1,14 @@
 # report-box-aws-sam
 
-Sample for deploying report-box to AWS
+Sample for deploying report-box to AWS.
+
+You need to install and setup sam-cli.
 
 ## Build
 
 Execute the following command to build.
+
+(You will need to run the build command `npm run build` in the root directory of this repository before running the following command.)
 
 ```
 ./build.sh
@@ -34,9 +38,8 @@ The parameters need to be set for the first release.
 |SchemaStoreBaseUrl|JSON Schema request url|`https://schemas.example.com`|
 |SignedParamsSecret|Secrets for verifying signed parameters||
 
-
 ## Delete applications
 
 ```
-aws cloudformation delete-stack --stack-name  sam-test-json-app
+aws cloudformation delete-stack --stack-name {your-application-name}
 ```

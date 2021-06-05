@@ -24,3 +24,27 @@ These application are included in the `/packages` directory.
 - `report-box-aws-sam` - AWS SAM and functions for validating submitted reports.
 - `signed-parameters-sample` - Sample of an embedded form for submitting signed parameters.
 
+## Getting Started
+
+Install dependencies.
+
+```
+npm i
+npx lerna bootstrap
+```
+
+Build packages.
+
+```
+npm run build
+```
+
+### Build and Deploy server-side application
+
+This repository contains a server-side application for validating and storing reports.
+For more details, please refer to [report-box-aws-sam README](./packages/report-box-aws-sam).
+
+### Build and Deploy client-side application
+
+`@piyoppi/report-box-forms` is provide a survey form based on JSON Schema.
+For more details, please refer to [@piyoppi/report-box-forms README](./packages/forms).

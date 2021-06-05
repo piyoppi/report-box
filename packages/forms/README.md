@@ -8,9 +8,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - `/surveys/:schemaId` - A survey form based on a specified JSON Schema.
 
+The specified JSON Schema is loaded from `${REACT_APP_SCHEMA_BASE_URL}/:schemaId`.
+For example, When the `REACT_APP_SCHEMA_BASE_URL` environment variable is set to `https://example.com` and access `/surveys/test` , The schema url is `https://example.com/test`
+
 ## Environment Variables
 
 You need to create a `.env` file before running the development server. The sample of `.env` file is `.env.develop`.
+
+|Variable|Details|
+|---|---|
+|REACT_APP_BASE_URL|URL to submitted reports|
+|REACT_APP_SCHEMA_BASE_URL|URL of schema store|
+|REACT_APP_DEVELOPMENT_MODE|When the value is "true", the `SchemaStoreSample` will be used as the schema store|
 
 ## Available Scripts
 
