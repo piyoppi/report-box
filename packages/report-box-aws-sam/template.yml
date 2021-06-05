@@ -59,7 +59,8 @@ Resources:
       Handler: report.postReportLambdaHandler
       Runtime: nodejs14.x
       Policies: 
-       - AmazonS3FullAccess
+       - S3WritePolicy:
+          BucketName: !Ref ReportBucket
       Events:
         PostReport:
           Type: Api
