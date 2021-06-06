@@ -29,6 +29,7 @@ const schema = new ReportBoxSchema(baseJson)
 const secret = 'test-secret'
 const signedParameters = jwt.sign({ params: { userId: '123' } }, secret)
 const invalidSignedParameters = jwt.sign({ params: { foo: 'bar' } }, secret)
+const noneParameters = jwt.sign({ params: { userId: '123' } }, secret, { algorithm: 'none' })
 
 describe('validate', () => {
   test('Should return true when report is valid', () => {
@@ -43,6 +44,20 @@ describe('validate', () => {
     expect(validator.validate()).toEqual(true)
     expect(report.verified).toEqual(true)
     expect(report.rejected).toEqual(false)
+  })
+
+  test('Should return false when sign algorithm is none', () => {
+    const report = new ReportBoxVerifiedReport()
+    report.fromReportRequestBody({
+      q1: 'answer 1',
+      q2: 'answer 2',
+     noneParameters
+    })
+    const validator = new ReportBoxReportValidator(schema, report, secret)
+
+    expect(validator.validate()).toEqual(false)
+    expect(report.verified).toEqual(false)
+    expect(report.rejected).toEqual(true)
   })
 
   test('Should return false when one of inputted parameter is missing', () => {
