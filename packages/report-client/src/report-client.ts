@@ -27,5 +27,9 @@ export class ReportClient {
       },
       body: JSON.stringify(this._report.serialize())
     })
+
+    return {
+      status: response.status
+    }
   }
 }

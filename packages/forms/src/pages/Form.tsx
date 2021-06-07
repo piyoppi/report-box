@@ -23,6 +23,7 @@ export default function FormPage() {
   const [schema, setSchema] = useState<JSONSchema7>({})
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
+  const [hasValidationError, setHasValidationError] = useState(false)
   const [succeeded, setSucceeded] = useState(false)
 
   useEffect(() => {
@@ -41,8 +42,14 @@ export default function FormPage() {
   const submit = async (e: any) => {
     setLoading(true)
     setHasError(false)
+    setHasValidationError(false)
     try {
-      await client.submit(id, e.formData)
+      const response = await client.submit(id, e.formData)
+
+      if (response.status !== 201) {
+        setHasError(true)
+        return
+      }
 
       const callbackUrl = reportBoxSchema?.optionalSettings.callbackUrl
       if (callbackUrl) {
@@ -58,7 +65,7 @@ export default function FormPage() {
   }
 
   const onError = () => {
-    setHasError(true)
+    setHasValidationError(true)
   }
 
   return (
@@ -75,7 +82,8 @@ export default function FormPage() {
             loading={loading}
           />
         }
-        { hasError && <Alert severity="error">入力内容に不備があります</Alert>}
+        { hasError && <Alert severity="error">エラーが発生しました（送信に失敗しました）</Alert>}
+        { hasValidationError && <Alert severity="error">入力内容に不備があります</Alert>}
         { succeeded && <Alert severity="success">投稿が完了しました</Alert>}
       </article>
     </>
