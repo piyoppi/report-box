@@ -10,7 +10,7 @@ let fetchMock = null as any
 
 beforeEach(() => {
   fetchMock = jest.fn().mockImplementation(() => {
-    return Promise.resolve()
+    return Promise.resolve({status: 201})
   })
 
   Object.defineProperty(window, 'fetch', {
@@ -28,9 +28,9 @@ describe('getReportUrl', () => {
 })
 
 describe('submit', () => {
-  test('Should submit a report', () => {
+  test('Should submit a report', async () => {
     const client = new ReportClient(baseUrl)
-    client.submit(id, data)
+    const response = await client.submit(id, data)
 
     expect(fetchMock).toHaveBeenCalledWith(client.getReportUrl(id), expect.objectContaining({
       method: 'POST',
@@ -39,5 +39,7 @@ describe('submit', () => {
       },
       body: JSON.stringify(client.report.serialize())
     }))
+
+    expect(response).toEqual({status: 201})
   })
 })
