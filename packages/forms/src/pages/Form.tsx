@@ -40,6 +40,7 @@ export default function FormPage() {
 
   const submit = async (e: any) => {
     setLoading(true)
+    setHasError(false)
     try {
       await client.submit(id, e.formData)
 
