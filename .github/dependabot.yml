@@ -1,7 +1,37 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/packages/forms"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/packages/report-box-aws-sam/functions"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/packages/report-client"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/packages/request-validator"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/packages/schema-store-client"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/packages/signed-parameters-sample"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 5
