@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "aws-sdk": "^2.670.0",
+    "aws-sdk": "^2.926.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
