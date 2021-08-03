@@ -14,7 +14,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "jest": "^27.0.5"
+    "jest": "27.0.5"
   },
   "author": "piyoppi",
   "license": "ISC"
