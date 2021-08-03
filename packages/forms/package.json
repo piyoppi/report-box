@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.58",
+    "@material-ui/core": "4.11.4",
+    "@material-ui/icons": "4.11.2",
+    "@material-ui/lab": "4.0.0-alpha.58",
     "@piyoppi/report-box-report-client": "0.0.1",
     "@piyoppi/report-box-resources": "0.0.1",
     "@piyoppi/report-box-schema-store-client": "0.0.1",
