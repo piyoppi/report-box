@@ -15,7 +15,7 @@
     "ts-loader": "^8.0.14",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.4.0",
-    "@types/json-schema": "^7.0.7"
+    "@types/json-schema": "7.0.9"
   },
   "scripts": {
     "test": "jest",
