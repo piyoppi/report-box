@@ -7,7 +7,7 @@ import { ReportClient, registerGetMessageHandler } from '@piyoppi/report-box-rep
 import { ReportBoxSchema } from '@piyoppi/report-box-resources'
 import {
   useParams,
-  useHistory
+  useNavigate
 } from 'react-router-dom'
 import Alert from '@material-ui/lab/Alert'
 import { SurveyForm } from '../components/SurveyForm'
@@ -18,8 +18,8 @@ let reportBoxSchema: ReportBoxSchema | null = null
 
 export default function FormPage() {
   const store = createStore()
-  const { id }: { id: string } = useParams()
-  const history = useHistory()
+  const { id } = useParams<'id'>()
+  const navigate = useNavigate()
   const [schema, setSchema] = useState<JSONSchema7>({})
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -27,6 +27,8 @@ export default function FormPage() {
   const [succeeded, setSucceeded] = useState(false)
 
   useEffect(() => {
+    if (!id) return
+
     store.fetchSchema(id).then((schema: ReportBoxSchema) => {
       reportBoxSchema = schema
       setSchema(schema.itemSchema)
@@ -34,10 +36,13 @@ export default function FormPage() {
       if (schema.optionalSettings.canConnectEmbeddingParent) {
         registerGetMessageHandler(schema.optionalSettings.embeddedOptions.parentOrigin, client)
       }
-    }).catch(_ => {
-      history.push('/not-found')
     })
   }, [])
+
+  if (!id) {
+    navigate('/not_found')
+    return (<></>)
+  }
 
   const submit = async (e: any) => {
     setLoading(true)

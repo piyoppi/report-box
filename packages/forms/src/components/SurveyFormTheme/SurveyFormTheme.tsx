@@ -1,6 +1,6 @@
 import { Theme } from '@rjsf/material-ui'
 import { FieldTemplateProps } from '@rjsf/core'
-import * as styles from './SurveyFormTheme.module.css'
+import styles from './SurveyFormTheme.module.css'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import List from '@material-ui/core/List'
