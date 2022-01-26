@@ -1,6 +1,6 @@
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route,
 } from 'react-router-dom'
 import FormPage from './pages/Form'
@@ -8,16 +8,12 @@ import NotFoundPage from './pages/NotFound'
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/surveys/:id">
-          <FormPage />
-        </Route>
-        <Route path="*">
-          <NotFoundPage />
-        </Route>
-      </Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/surveys/:id" element={<FormPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
