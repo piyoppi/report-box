@@ -12,7 +12,7 @@
     "@piyoppi/report-box-resources": "0.0.1"
   },
   "devDependencies": {
-    "typescript": "4.6.2",
+    "typescript": "4.6.3",
     "@types/jest": "27.4.1",
     "jest": "27.5.1",
     "ts-jest": "27.1.3",
