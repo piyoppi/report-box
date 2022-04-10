@@ -12,7 +12,7 @@
     "@rjsf/core": "^3.2.1",
     "@rjsf/material-ui": "^3.2.1",
     "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^26.0.23",
     "@types/json-schema": "^7.0.7",
