@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.959.0",
-    "uuid": "^8.3.2"
+    "uuid": "^11.0.0"
   },
   "devDependencies": {
     "jest": "^27.0.6"
